@@ -5,6 +5,14 @@
  */
 package StudentManagement;
 
+import model.Student;
+import model.StudentList;
+
+import javax.swing.*;
+import java.awt.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 /**
  *
  * @author Adminstratos
@@ -17,6 +25,8 @@ public class Student_Management extends javax.swing.JFrame {
     public Student_Management() {
         initComponents();
     }
+    SimpleDateFormat dateFormat=new SimpleDateFormat("dd/MM/yyyy");
+    StudentList myStudentList=new StudentList();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -251,10 +261,45 @@ public class Student_Management extends javax.swing.JFrame {
 
     private void textfield_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfield_idActionPerformed
         // TODO add your handling code here:
+        if(validateForm()){
+            Student student=getModel();
+            if(myStudentList.add(student)>0){
+                JOptionPane.showMessageDialog(this,"Save success");
+                fillDataTable();
+                reset();
+            }
+        }
     }//GEN-LAST:event_textfield_idActionPerformed
-//    public boolean validateForm(){
-//        if(textfield_id.getText().isEmpty())
-//    }
+    public boolean validateForm(){
+        if(textfield_id.getText().isEmpty()
+                ||textField_studentName.getText().isEmpty()
+                ||textField_email.getText().isEmpty()
+                ||textField_phoneNumber.getText().isEmpty()
+                ||textField_birthday.getText().isEmpty()){
+            return false;
+        }
+        return true;
+    }
+    public Student getModel(){
+        Student student= new Student();
+        student.setName(textField_studentName.getText());
+        student.setId(textfield_id.getText());
+        try{
+            student.setBirthday(dateFormat.parse(textField_birthday.getText()));
+        }catch (ParseException e){
+            System.out.println("Error: "+e.toString());
+        }
+        student.setEmail(textField_email.getText());
+        boolean sex=false;
+        if (radioButton_male.isSelected()){
+            sex=true;
+        }
+        student.setSex(sex);
+        student.setPhoneNumber(textField_phoneNumber.getText());
+        return student;
+
+
+    }
 
     private void textField_studentNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField_studentNameActionPerformed
         // TODO add your handling code here:
@@ -267,10 +312,6 @@ public class Student_Management extends javax.swing.JFrame {
     private void textField_emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField_emailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textField_emailActionPerformed
-
-
-
-
 
     private void textField_birthdayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField_birthdayActionPerformed
         // TODO add your handling code here:

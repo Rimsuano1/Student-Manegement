@@ -43,7 +43,6 @@ public class StudentManagement extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_Student = new javax.swing.JTable();
         button_Add = new javax.swing.JButton();
-        button_Save = new javax.swing.JButton();
         button_Update = new javax.swing.JButton();
         button_Delete = new javax.swing.JButton();
         label_PhoneNumber = new javax.swing.JLabel();
@@ -114,16 +113,13 @@ public class StudentManagement extends javax.swing.JFrame {
             }
         });
 
-        button_Save.setFont(new java.awt.Font("UD Digi Kyokasho NP-B", 1, 14)); // NOI18N
-        button_Save.setText("Save");
-        button_Save.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_SaveActionPerformed(evt);
-            }
-        });
-
         button_Update.setFont(new java.awt.Font("UD Digi Kyokasho NP-B", 1, 14)); // NOI18N
         button_Update.setText("Update");
+        button_Update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_UpdateActionPerformed(evt);
+            }
+        });
 
         button_Delete.setFont(new java.awt.Font("UD Digi Kyokasho NP-B", 1, 14)); // NOI18N
         button_Delete.setText("Delete");
@@ -136,7 +132,7 @@ public class StudentManagement extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,8 +161,6 @@ public class StudentManagement extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(radioButton_Female, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(button_Save, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(button_Update, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
@@ -207,13 +201,12 @@ public class StudentManagement extends javax.swing.JFrame {
                     .addComponent(label_PhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textField_PhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(label_Birthday)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(label_Birthday, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(textField_Birthday, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(button_Add)
-                    .addComponent(button_Save)
                     .addComponent(button_Update)
                     .addComponent(button_Delete))
                 .addGap(25, 25, 25)
@@ -240,9 +233,9 @@ public class StudentManagement extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_button_AddActionPerformed
 
-    private void button_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_SaveActionPerformed
+    private void button_UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_UpdateActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_button_SaveActionPerformed
+    }//GEN-LAST:event_button_UpdateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -283,7 +276,6 @@ public class StudentManagement extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton button_Add;
     private javax.swing.JButton button_Delete;
-    private javax.swing.JButton button_Save;
     private javax.swing.JButton button_Update;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label_Birthday;
