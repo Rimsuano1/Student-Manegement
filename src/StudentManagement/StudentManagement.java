@@ -103,8 +103,14 @@ public class StudentManagement extends javax.swing.JFrame {
                 "ID", "Student name", "Sex", "Email", "Phone number", "Birthday"
             }
         ));
+        tb_Student.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_StudentMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tb_Student);
 
+        button_Add.setBackground(new java.awt.Color(204, 204, 204));
         button_Add.setFont(new java.awt.Font("UD Digi Kyokasho NP-B", 1, 14)); // NOI18N
         button_Add.setText("Add");
         button_Add.addActionListener(new java.awt.event.ActionListener() {
@@ -237,6 +243,10 @@ public class StudentManagement extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_button_UpdateActionPerformed
 
+    private void tb_StudentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_StudentMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tb_StudentMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -287,7 +297,7 @@ public class StudentManagement extends javax.swing.JFrame {
     private javax.swing.JLabel label_studentManagement;
     private javax.swing.JRadioButton radioButton_Female;
     private javax.swing.JRadioButton radioButton_Male;
-    private javax.swing.JTable tb_Student;
+    public javax.swing.JTable tb_Student;
     private javax.swing.JTextField textField_Birthday;
     private javax.swing.JTextField textField_Email;
     private javax.swing.JTextField textField_Id;

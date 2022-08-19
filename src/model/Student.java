@@ -8,6 +8,7 @@ public class Student {
     protected boolean sex;
     protected String email;
     protected String phoneNumber;
+    protected Date birthday;
 
     public String getId() {
         return id;
@@ -25,7 +26,7 @@ public class Student {
         this.name = name;
     }
 
-    public boolean isSex() {
+    public boolean getSex() {
         return sex;
     }
 
@@ -57,7 +58,7 @@ public class Student {
         this.birthday = birthday;
     }
 
-    protected Date birthday;
+
 
     public Student(String id, String name, boolean sex, String email, String phoneNumber, Date birthday){
         this.id=id;

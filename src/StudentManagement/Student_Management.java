@@ -9,6 +9,7 @@ import model.Student;
 import model.StudentList;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -258,18 +259,43 @@ public class Student_Management extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    public void fillDataTable(){
+        DefaultTableModel model=(DefaultTableModel) tb_Student.getModel();
+        model.setRowCount(0);//clear table
+        for(Student student:myStudentList.getStudentList()){
+            Object[] rowData =new Object[6];
+            rowData[0]=student.getId();
+            rowData[1]=student.getName();
+            rowData[2]=student.getSex()?"Male":"Female";
+            rowData[3]=student.getEmail();
+            rowData[4]=student.getPhoneNumber();
+            rowData[5]=student.getBirthday();
+
+            model.addRow(rowData);
+        }
+    }
 
     private void textfield_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfield_idActionPerformed
         // TODO add your handling code here:
-        if(validateForm()){
-            Student student=getModel();
-            if(myStudentList.add(student)>0){
-                JOptionPane.showMessageDialog(this,"Save success");
+        if (validateForm()) {
+            Student student = getModel();
+            if (myStudentList.add(student) > 0) {
+                JOptionPane.showMessageDialog(this, "Save success");
                 fillDataTable();
                 reset();
             }
         }
-    }//GEN-LAST:event_textfield_idActionPerformed
+    }
+    public void reset(){
+        textfield_id.setText("");
+        textField_studentName.setText("");
+        radioButton_male.isSelected();
+        textField_email.setText("");
+        textField_phoneNumber.setText("");
+        textField_birthday.setText("");
+    }
+
+    //GEN-LAST:event_textfield_idActionPerformed
     public boolean validateForm(){
         if(textfield_id.getText().isEmpty()
                 ||textField_studentName.getText().isEmpty()
@@ -340,7 +366,7 @@ public class Student_Management extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -388,6 +414,7 @@ public class Student_Management extends javax.swing.JFrame {
     private javax.swing.JLabel label_studentName;
     private javax.swing.JRadioButton radioButton_female;
     private javax.swing.JRadioButton radioButton_male;
+    public javax.swing.JTable tb_Student;
     private javax.swing.JTextField textField_birthday;
     private javax.swing.JTextField textField_email;
     private javax.swing.JTextField textField_phoneNumber;
