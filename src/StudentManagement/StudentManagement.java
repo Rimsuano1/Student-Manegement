@@ -5,6 +5,10 @@
  */
 package StudentManagement;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Adminstratos
@@ -38,8 +42,8 @@ public class StudentManagement extends javax.swing.JFrame {
         label_Birthday = new javax.swing.JLabel();
         textField_Birthday = new javax.swing.JTextField();
         label_Sex = new javax.swing.JLabel();
-        radioButton_Male = new javax.swing.JRadioButton();
-        radioButton_Female = new javax.swing.JRadioButton();
+        RDB_Male = new javax.swing.JRadioButton();
+        RDB_Female = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_Student = new javax.swing.JTable();
         button_Add = new javax.swing.JButton();
@@ -47,12 +51,16 @@ public class StudentManagement extends javax.swing.JFrame {
         button_Delete = new javax.swing.JButton();
         label_PhoneNumber = new javax.swing.JLabel();
         textField_PhoneNumber = new javax.swing.JTextField();
+        button_Search = new javax.swing.JButton();
+        button__Close = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         label_studentManagement.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         label_studentManagement.setForeground(new java.awt.Color(102, 102, 0));
+        label_studentManagement.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_studentManagement.setText("STUDENT MANAGEMENT");
+        label_studentManagement.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         label_Id.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         label_Id.setText("ID:");
@@ -66,8 +74,20 @@ public class StudentManagement extends javax.swing.JFrame {
         label_Email.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         label_Email.setText("Email:");
 
+        textField_StudentName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textField_StudentNameActionPerformed(evt);
+            }
+        });
+
         label_StudentName.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         label_StudentName.setText("Student name:");
+
+        textField_Email.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textField_EmailActionPerformed(evt);
+            }
+        });
 
         label_Birthday.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         label_Birthday.setText("Birthday:");
@@ -81,23 +101,27 @@ public class StudentManagement extends javax.swing.JFrame {
         label_Sex.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         label_Sex.setText("Sex:");
 
-        buttonGroup1.add(radioButton_Male);
-        radioButton_Male.setText("Male");
-        radioButton_Male.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(RDB_Male);
+        RDB_Male.setSelected(true);
+        RDB_Male.setText("Male");
+        RDB_Male.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        RDB_Male.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioButton_MaleActionPerformed(evt);
+                RDB_MaleActionPerformed(evt);
             }
         });
 
-        buttonGroup1.add(radioButton_Female);
-        radioButton_Female.setText("Female");
+        buttonGroup1.add(RDB_Female);
+        RDB_Female.setText("Female");
+        RDB_Female.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RDB_FemaleActionPerformed(evt);
+            }
+        });
 
         tb_Student.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Student name", "Sex", "Email", "Phone number", "Birthday"
@@ -129,33 +153,44 @@ public class StudentManagement extends javax.swing.JFrame {
 
         button_Delete.setFont(new java.awt.Font("UD Digi Kyokasho NP-B", 1, 14)); // NOI18N
         button_Delete.setText("Delete");
+        button_Delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_DeleteActionPerformed(evt);
+            }
+        });
 
         label_PhoneNumber.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         label_PhoneNumber.setText("Phone number:");
+
+        button_Search.setFont(new java.awt.Font("UD Digi Kyokasho NK-B", 1, 14)); // NOI18N
+        button_Search.setText("Search");
+        button_Search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_SearchActionPerformed(evt);
+            }
+        });
+
+        button__Close.setFont(new java.awt.Font("UD Digi Kyokasho NP-B", 1, 14)); // NOI18N
+        button__Close.setText("Close");
+        button__Close.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button__CloseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(154, 154, 154)
+                .addComponent(label_studentManagement, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(177, 177, 177))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(label_Id)
-                                    .addComponent(label_Email)
-                                    .addComponent(label_StudentName)
-                                    .addComponent(label_PhoneNumber)
-                                    .addComponent(label_Birthday, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(27, 27, 27)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(textField_StudentName, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
-                                    .addComponent(textField_Id)
-                                    .addComponent(textField_Email)
-                                    .addComponent(textField_PhoneNumber, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(textField_Birthday)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(button_Add, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -163,41 +198,60 @@ public class StudentManagement extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(49, 49, 49)
-                                        .addComponent(radioButton_Male, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(RDB_Male, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(radioButton_Female, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(RDB_Female, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(283, 283, 283))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(18, 18, 18)
                                         .addComponent(button_Update, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(button_Delete, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(86, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(label_studentManagement)
-                .addGap(133, 133, 133))
+                                        .addComponent(button_Delete, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(29, 29, 29)
+                                        .addComponent(button_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(button__Close, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(label_Id)
+                                    .addComponent(label_StudentName)
+                                    .addComponent(label_PhoneNumber)
+                                    .addComponent(label_Birthday, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(label_Email))
+                                .addGap(27, 27, 27)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(textField_StudentName, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                                    .addComponent(textField_Id)
+                                    .addComponent(textField_Email)
+                                    .addComponent(textField_PhoneNumber, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(textField_Birthday))
+                                .addGap(150, 150, 150))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(jScrollPane1)))
+                .addGap(92, 92, 92))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(105, 105, 105)
                 .addComponent(label_studentManagement)
-                .addGap(18, 18, 18)
+                .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(textField_Id, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label_Id))
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(label_StudentName)
-                    .addComponent(textField_StudentName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(label_StudentName))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(textField_StudentName, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_Sex)
-                    .addComponent(radioButton_Male)
-                    .addComponent(radioButton_Female))
+                    .addComponent(RDB_Male)
+                    .addComponent(RDB_Female, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label_Email, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -214,10 +268,12 @@ public class StudentManagement extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(button_Add)
                     .addComponent(button_Update)
-                    .addComponent(button_Delete))
+                    .addComponent(button_Delete)
+                    .addComponent(button_Search)
+                    .addComponent(button__Close))
                 .addGap(25, 25, 25)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42))
         );
 
         pack();
@@ -227,9 +283,9 @@ public class StudentManagement extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textField_IdActionPerformed
 
-    private void radioButton_MaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioButton_MaleActionPerformed
+    private void RDB_MaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RDB_MaleActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_radioButton_MaleActionPerformed
+    }//GEN-LAST:event_RDB_MaleActionPerformed
 
     private void textField_BirthdayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField_BirthdayActionPerformed
         // TODO add your handling code here:
@@ -237,6 +293,29 @@ public class StudentManagement extends javax.swing.JFrame {
 
     private void button_AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_AddActionPerformed
         // TODO add your handling code here:
+        String gender;
+        if (RDB_Male.isSelected()) {
+            gender = "Male";
+        } else {
+            gender = "Female";
+        }
+        if (textField_Id.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Please enter the ID");
+        } else if (textField_StudentName.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Please enter the Name");
+        } else if (textField_Email.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Please enter the Email");
+        } else if (textField_PhoneNumber.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Please enter the PhoneNumber");
+        } else if (textField_Birthday.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Please enter the Birthday");
+        } else {
+            DefaultTableModel tb_model = (DefaultTableModel) tb_Student.getModel();
+            String table[] = {textField_Id.getText(), textField_StudentName.getText(), gender, textField_Email.getText(), textField_PhoneNumber.getText(), textField_Birthday.getText()};
+            tb_model.addRow(table);
+            JOptionPane.showMessageDialog(this, "OK");
+
+        }
     }//GEN-LAST:event_button_AddActionPerformed
 
     private void button_UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_UpdateActionPerformed
@@ -247,6 +326,47 @@ public class StudentManagement extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tb_StudentMouseClicked
 
+    private void textField_StudentNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField_StudentNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textField_StudentNameActionPerformed
+
+    private void textField_EmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField_EmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textField_EmailActionPerformed
+
+    private void RDB_FemaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RDB_FemaleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RDB_FemaleActionPerformed
+
+    private void button_DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_DeleteActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel tb_model = (DefaultTableModel) tb_Student.getModel();
+        if (tb_Student.getSelectedRowCount() == 1) {
+            tb_model.removeRow(tb_Student.getSelectedRow());
+            JOptionPane.showMessageDialog(this, "Remove ok");
+
+        } else {
+            if (tb_Student.getRowCount() == 0) {
+                JOptionPane.showMessageDialog(this, "Empty");
+            } else {
+                JOptionPane.showMessageDialog(this, "Please select");
+            }
+        }
+    }//GEN-LAST:event_button_DeleteActionPerformed
+    private JFrame jframe;
+    private void button__CloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button__CloseActionPerformed
+        // TODO add your handling code here:
+        jframe = new JFrame("Exit");
+        if (JOptionPane.showConfirmDialog(jframe, "You want to exit this program?", "Exit the app",
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION) {
+            System.exit(0);
+        }
+    }//GEN-LAST:event_button__CloseActionPerformed
+
+    private void button_SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_SearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_button_SearchActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -254,7 +374,7 @@ public class StudentManagement extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -283,10 +403,14 @@ public class StudentManagement extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton RDB_Female;
+    private javax.swing.JRadioButton RDB_Male;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton button_Add;
     private javax.swing.JButton button_Delete;
+    private javax.swing.JButton button_Search;
     private javax.swing.JButton button_Update;
+    private javax.swing.JButton button__Close;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label_Birthday;
     private javax.swing.JLabel label_Email;
@@ -295,8 +419,6 @@ public class StudentManagement extends javax.swing.JFrame {
     private javax.swing.JLabel label_Sex;
     private javax.swing.JLabel label_StudentName;
     private javax.swing.JLabel label_studentManagement;
-    private javax.swing.JRadioButton radioButton_Female;
-    private javax.swing.JRadioButton radioButton_Male;
     public javax.swing.JTable tb_Student;
     private javax.swing.JTextField textField_Birthday;
     private javax.swing.JTextField textField_Email;

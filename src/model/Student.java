@@ -60,17 +60,7 @@ public class Student {
 
 
 
-    public Student(String id, String name, boolean sex, String email, String phoneNumber, Date birthday){
-        this.id=id;
-        this.name=name;
-        this.sex=sex;
-        this.email=email;
-        this.phoneNumber=phoneNumber;
-        this.birthday=birthday;
-    }
 
-    public Student(){
 
-    }
 
 }
