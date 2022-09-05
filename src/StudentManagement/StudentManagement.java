@@ -219,7 +219,7 @@ public class StudentManagement extends javax.swing.JFrame {
 
         button_Load.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         button_Load.setIcon(new javax.swing.ImageIcon("C:\\Users\\Adminstratos\\Downloads\\icons8-reset-20.png")); // NOI18N
-        button_Load.setText("Load");
+        button_Load.setText("Update date");
         button_Load.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button_LoadActionPerformed(evt);
@@ -256,24 +256,21 @@ public class StudentManagement extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(button_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(textField_StudentName, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(textField_Email, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addComponent(textField_Birthday, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                                                .addComponent(textField_PhoneNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
                                             .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(textField_StudentName, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(textField_Email, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                        .addComponent(textField_Birthday, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                                                        .addComponent(textField_PhoneNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addComponent(RDB_Male)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(RDB_Female, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                .addGap(23, 23, 23))
+                                                .addComponent(RDB_Male)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(RDB_Female, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(button_Load)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(button_Save, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(13, 13, 13)))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(button_Save, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(7, 7, 7)
                                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(button_Add)
@@ -283,7 +280,7 @@ public class StudentManagement extends javax.swing.JFrame {
                                         .addComponent(button_Delete, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(button__Close, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addContainerGap(13, Short.MAX_VALUE))))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -354,7 +351,6 @@ public class StudentManagement extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
     private void textField_IdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField_IdActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textField_IdActionPerformed
@@ -367,6 +363,41 @@ public class StudentManagement extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textField_BirthdayActionPerformed
 
+    public boolean valid_ID(String id) {
+        try {
+            int num = Integer.parseInt(id);
+            return false;
+        } catch (Exception e) {
+            return true;
+        }
+    }
+
+    public boolean valid_StudentName(String StudentName) {
+        try {
+            boolean validName = StudentName.matches("[a-zA-Z_]+");
+            return !validName;
+        } catch (Exception e) {
+            return true;
+        }
+    }
+
+    public boolean valid_Email(String Email) {
+        try {
+            boolean valiEmail = Email.matches("^[A-Za-z0-9+_.-]+@(.+)$");
+            return !valiEmail;
+        } catch (Exception e) {
+            return true;
+        }
+    }
+
+    public boolean valid_PhoneNumber(String PhoneNumber) {
+        try {
+            boolean validPhoneNumber = PhoneNumber.matches("^(1\\-)?[0-9]{3}\\-?[0-9]{3}\\-?[0-9]{4}$");
+            return !validPhoneNumber;
+        } catch (Exception e) {
+            return true;
+        }
+    }
     private void button_AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_AddActionPerformed
         // TODO add your handling code here:
         String gender;
@@ -377,12 +408,24 @@ public class StudentManagement extends javax.swing.JFrame {
         }
         if (textField_Id.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Please enter the ID");
+        } else if (valid_ID(textField_Id.getText())) {
+            JOptionPane.showMessageDialog(this, "Invali Id");
+
         } else if (textField_StudentName.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Please enter the Name");
+        } else if (valid_StudentName(textField_StudentName.getText().replaceAll(" ", ""))) {
+            JOptionPane.showMessageDialog(this, "Invali name");
+
         } else if (textField_Email.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Please enter the Email");
+        } else if (valid_Email(textField_Email.getText())) {
+            JOptionPane.showMessageDialog(this, "Invali Email");
+
         } else if (textField_PhoneNumber.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Please enter the PhoneNumber");
+        } else if (valid_PhoneNumber(textField_PhoneNumber.getText())) {
+            JOptionPane.showMessageDialog(this, "Invali PhoneNumber");
+
         } else if (textField_Birthday.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Please enter the Birthday");
         } else {
@@ -390,7 +433,12 @@ public class StudentManagement extends javax.swing.JFrame {
             String table[] = {textField_Id.getText(), textField_StudentName.getText(), gender, textField_Email.getText(), textField_PhoneNumber.getText(), textField_Birthday.getText()};
             tb_model.addRow(table);
             JOptionPane.showMessageDialog(this, "OK");
-
+            textField_Id.setText("");
+            textField_StudentName.setText("");
+            textField_Email.setText("");
+            textField_Birthday.setText("");
+            textField_PhoneNumber.setText("");
+            RDB_Male.doClick();
         }
     }//GEN-LAST:event_button_AddActionPerformed
 
@@ -436,10 +484,9 @@ else {
 
         if (tb_Gender == "Male") {
             RDB_Male.doClick();
-            String Gender = "Male";
+
         } else {
             RDB_Female.doClick();
-            String Gender = "Female";
         }
         textField_Email.setText(tb_Email);
         textField_PhoneNumber.setText(tb_PhoneNumber);
@@ -452,7 +499,7 @@ else {
     }//GEN-LAST:event_textField_StudentNameActionPerformed
 
     private void textField_EmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField_EmailActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_textField_EmailActionPerformed
 
     private void RDB_FemaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RDB_FemaleActionPerformed
@@ -483,16 +530,16 @@ else {
         }
     }//GEN-LAST:event_button__CloseActionPerformed
 
-    public void search(String idRequest) {
+    public void search(String nameRequest) {
         DefaultTableModel tb_Model = (DefaultTableModel) tb_Student.getModel();
         TableRowSorter<DefaultTableModel> trs = new TableRowSorter<>(tb_Model);
         tb_Student.setRowSorter(trs);
-        trs.setRowFilter(RowFilter.regexFilter(idRequest));
+        trs.setRowFilter(RowFilter.regexFilter(nameRequest));
     }
     private void button_SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_SearchActionPerformed
         // TODO add your handling code here:
-        String idRequest = textField_Search.getText();
-        search(idRequest);
+        String nameRequest = textField_Search.getText();
+        search(nameRequest);
     }//GEN-LAST:event_button_SearchActionPerformed
 
     private void textField_EmailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textField_EmailKeyReleased
@@ -530,6 +577,7 @@ else {
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             DefaultTableModel tb_Model = (DefaultTableModel) tb_Student.getModel();
             Object[] lines = bufferedReader.lines().toArray();
+            JOptionPane.showMessageDialog(this, "Reload ok");
             for (int i = 0; i < lines.length; i++) {
                 String[] row = lines[i].toString().split(" ");
                 tb_Model.addRow(row);
